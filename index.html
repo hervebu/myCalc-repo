@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CRUNCH-calculator app</title>
+	
+	<link rel="stylesheet"  href="https://fonts.googleapis.com/css? family=Courgette">
+	
+	
+	<style type="text/css">
+		body{
+			background-color: #e6ffe6;
+			width: 100%;
+			height: 100%;
+
+
+		}
+		#calculator{
+			
+			background-color: #fff;
+			
+			margin:5% 35% 5%;
+			border-radius: 5px;
+			box-shadow: 5px 5px 15px 3px #666666 ; 
+			padding: 20px;
+		}
+		#calculator-upper{
+			width: 100%;
+			height: 30%;
+		}
+		#calculator-keys{
+			
+			display: inline-block;
+			height: 70%;
+			width: 100%;
+
+		}
+		#number-grid{
+			width: 95%;
+			
+			display: grid;
+			grid-template-columns: auto auto auto auto ;
+
+
+		}
+		.grid-item{
+			box-sizing: border-box;
+			font-family: 'Courgette';
+			font-weight: bold;
+			background-color:#f94d00;
+			font-size:140%; 
+			grid-gap: 312.5%;
+			color: #fff;
+			text-align: center; 
+			border: none;
+			outline: none;
+			margin: 5px;
+			border-radius: 3px;
+			box-shadow: 3px 3px 3px #666666;
+		}
+		.grid-item:hover{
+			background-color: rgb(255,102,0,.8);
+		}
+		#equal-button{
+			width: 93%;
+			margin: 5px;
+			position: center;
+			font-size: 40px;
+			color: #fff;
+			background-color:#008000;
+			border-radius: 5px;
+			border: none;
+			box-shadow: 3px 3px 3px #666666;
+			outline: none;
+		}
+		
+		.clear{
+			background-color:#ff0800;
+			font-size: 130%;
+			font-family: 'arial';
+
+		}
+		.clear:hover{
+			background-color: rgb(255,8,0,.8);
+
+		}
+		.operator{
+			border-radius: 50px;
+			background-color: #008000;
+			font-family: 'arial';
+		}
+		.operator:hover{
+			background-color: rgb(0,128,0,.8);
+		}
+		#logo-name{
+			font-family: 'Courgette';
+			margin-left:  3%;
+			width: 93%;
+			font-size: 120%;
+			font-weight: bold;
+			color:#f94d00;
+		}
+		#calculator-display{
+			text-align: right;
+			font-size: 20px;
+			color: blue;
+			font-family: 'Courgette';
+			height: 40px;
+			margin-left:  2%;
+			margin-bottom: 10%;
+			width: 80%;
+			padding: 10px;
+			outline: none;
+			background-color: #e6ffe6;
+			border: 3px solid #008000;
+		}
+@media screen and (max-width:1125px) {
+  * {
+    font-size:15px;
+  }
+  #calculator {
+    margin:5% 10% ;
+  }
+}
+		
+	</style>
+	<script type="text/javascript">
+		var firstInput, secondInput, answer,sign;
+ 		 
+		function displayDigit(itsValue) {
+			if (document.getElementById('calculator-display').value != '0') {
+			document.getElementById('calculator-display').value += itsValue;
+			}
+		}
+
+		function addPoint() {
+			if (!document.getElementById('calculator-display').value.includes('.') 
+				&& document.getElementById('calculator-display').value != '') {
+				document.getElementById('calculator-display').value +='.';
+
+			}
+		}
+		
+		function arithmeticOperator(operator){
+			document.getElementById('calculator-display').value += operator;
+			
+		 }
+
+
+		 function getResult(){
+		 	try{
+		 	document.getElementById('calculator-display').value = 
+		 	eval(document.getElementById('calculator-display').value ); 
+		 }
+		 catch(getResult) {
+		 	document.getElementById('calculator-display').value = 'ERROR';
+		 }
+		 }
+
+
+		 function clearDisplay(){
+		 	document.getElementById('calculator-display').value = '';
+		 }
+
+		  
+
+
+
+
+
+ 
+	</script>
+</head>
+<body>
+	
+	<div id="calculator">
+		<div id="calculator-upper">
+			<p id="logo-name">MiCALC</p>
+			<input type="text"   id="calculator-display"  disable  placeholder="0"></input>
+		</div>
+		<div id="calculator-keys">
+			<div id="number-grid">
+				<button class="grid-item number"  onclick="displayDigit('7')" value="7">7</button>
+				<button id="number"  class="grid-item "  onclick="displayDigit('8')" value="8">8</button>
+				<button id="number"  class="grid-item " onclick="displayDigit('9')" value="9">9</button>
+				<button   class="grid-item operator" onclick="arithmeticOperator('+')" value="+">+</button>
+				<button id="number"  class="grid-item " onclick="displayDigit('4')" value="4">4</button>
+				<button id="number"  class="grid-item " onclick="displayDigit('5')" value="5">5</button>
+				<button id="number"  class="grid-item " onclick="displayDigit('6')" value="6">6</button>
+				<button   class="grid-item operator " onclick="arithmeticOperator('-')" value="-">-</button>
+				<button id="number"  class="grid-item " onclick="displayDigit('1')" value="1">1</button>
+				<button id="number"  class="grid-item " onclick="displayDigit('2')" value="2">2</button>
+				<button id="number"  class="grid-item " onclick="displayDigit('3')" value="3">3</button>
+				<button  class="grid-item operator multiply" onclick="arithmeticOperator('*')" value="*">x</button>
+				<button   class="grid-item point" onclick="addPoint()" value=".">.</button>
+				<button id="number"  class="grid-item " onclick="displayDigit('0')" value="0">0</button>
+				<button  class="grid-item clear" onclick="clearDisplay()" value="clear" >CE</button>
+				<button  class="grid-item operator divide" onclick="arithmeticOperator('/')" value="/">/</button>
+			</div>
+			<button  id="equal-button" onclick="getResult()">=</button>
+				
+			
+				
+				
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>
